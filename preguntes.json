@@ -1,0 +1,274 @@
+{
+    "preguntes": [
+      {
+        "id": 1,
+        "pregunta": "Quin any es va estrenar 'Titanic'?",
+        "respostes": [
+          {
+            "id": 1,
+            "resposta": "1997",
+            "correcta": true
+          },
+          {
+            "id": 2,
+            "resposta": "1998",
+            "correcta": false
+          },
+          {
+            "id": 3,
+            "resposta": "1999",
+            "correcta": false
+          },
+          {
+            "id": 4,
+            "resposta": "2000",
+            "correcta": false
+          }
+        ],
+        "imatge": "./img/titanic.jpeg"
+      },
+      {
+        "id": 2,
+        "pregunta": "Quin any es va estrenar 'El senyor dels anells: La comunitat de l'anell'?",
+        "respostes": [
+          {
+            "id": 1,
+            "resposta": "2001",
+            "correcta": true
+          },
+          {
+            "id": 2,
+            "resposta": "2002",
+            "correcta": false
+          },
+          {
+            "id": 3,
+            "resposta": "2003",
+            "correcta": false
+          },
+          {
+            "id": 4,
+            "resposta": "2004",
+            "correcta": false
+          }
+        ],
+        "imatge": "./img/lordRings.jpeg"
+      },
+      {
+        "id": 3,
+        "pregunta": "Quin any es va estrenar 'Star Wars: Una nova esperança'?",
+        "respostes": [
+          {
+            "id": 1,
+            "resposta": "1977",
+            "correcta": true
+          },
+          {
+            "id": 2,
+            "resposta": "1980",
+            "correcta": false
+          },
+          {
+            "id": 3,
+            "resposta": "1983",
+            "correcta": false
+          },
+          {
+            "id": 4,
+            "resposta": "1986",
+            "correcta": false
+          }
+        ],
+        "imatge": "./img/starwars.jpeg"
+      },
+      {
+        "id": 4,
+        "pregunta": "Quin any es va estrenar 'E.T. l'extraterrestre'?",
+        "respostes": [
+          {
+            "id": 1,
+            "resposta": "1982",
+            "correcta": true
+          },
+          {
+            "id": 2,
+            "resposta": "1983",
+            "correcta": false
+          },
+          {
+            "id": 3,
+            "resposta": "1984",
+            "correcta": false
+          },
+          {
+            "id": 4,
+            "resposta": "1985",
+            "correcta": false
+          }
+        ],
+        "imatge": "./img/E_T.jpeg"
+      },
+      {
+        "id": 5,
+        "pregunta": "Quin any es va estrenar 'Inception'?",
+        "respostes": [
+          {
+            "id": 1,
+            "resposta": "2010",
+            "correcta": true
+          },
+          {
+            "id": 2,
+            "resposta": "2009",
+            "correcta": false
+          },
+          {
+            "id": 3,
+            "resposta": "2011",
+            "correcta": false
+          },
+          {
+            "id": 4,
+            "resposta": "2012",
+            "correcta": false
+          }
+        ],
+        "imatge": "./img/inception.jpeg"
+      },
+      {
+        "id": 6,
+        "pregunta": "Quin any es va estrenar 'Jurassic Park'?",
+        "respostes": [
+          {
+            "id": 1,
+            "resposta": "1993",
+            "correcta": true
+          },
+          {
+            "id": 2,
+            "resposta": "1994",
+            "correcta": false
+          },
+          {
+            "id": 3,
+            "resposta": "1995",
+            "correcta": false
+          },
+          {
+            "id": 4,
+            "resposta": "1996",
+            "correcta": false
+          }
+        ],
+        "imatge": "./img/jurassicPark.jpeg"
+      },
+      {
+        "id": 7,
+        "pregunta": "Quin any es va estrenar 'The Matrix'?",
+        "respostes": [
+          {
+            "id": 1,
+            "resposta": "1999",
+            "correcta": true
+          },
+          {
+            "id": 2,
+            "resposta": "2000",
+            "correcta": false
+          },
+          {
+            "id": 3,
+            "resposta": "2001",
+            "correcta": false
+          },
+          {
+            "id": 4,
+            "resposta": "2002",
+            "correcta": false
+          }
+        ],
+        "imatge": "./img/matrix.jpeg"
+      },
+      {
+        "id": 8,
+        "pregunta": "Quin any es va estrenar 'Back to the Future'?",
+        "respostes": [
+          {
+            "id": 1,
+            "resposta": "1985",
+            "correcta": true
+          },
+          {
+            "id": 2,
+            "resposta": "1986",
+            "correcta": false
+          },
+          {
+            "id": 3,
+            "resposta": "1987",
+            "correcta": false
+          },
+          {
+            "id": 4,
+            "resposta": "1988",
+            "correcta": false
+          }
+        ],
+        "imatge": "./img/backToTheFuture.jpeg"
+      },
+      {
+        "id": 9,
+        "pregunta": "Quin any es va estrenar 'Avatar'?",
+        "respostes": [
+          {
+            "id": 1,
+            "resposta": "2009",
+            "correcta": true
+          },
+          {
+            "id": 2,
+            "resposta": "2010",
+            "correcta": false
+          },
+          {
+            "id": 3,
+            "resposta": "2011",
+            "correcta": false
+          },
+          {
+            "id": 4,
+            "resposta": "2012",
+            "correcta": false
+          }
+        ],
+        "imatge": "./img/avatar.jpeg"
+      },
+      {
+        "id": 10,
+        "pregunta": "Quin any es va estrenar 'The Lion King'?",
+        "respostes": [
+          {
+            "id": 1,
+            "resposta": "1994",
+            "correcta": true
+          },
+          {
+            "id": 2,
+            "resposta": "1995",
+            "correcta": false
+          },
+          {
+            "id": 3,
+            "resposta": "1996",
+            "correcta": false
+          },
+          {
+            "id": 4,
+            "resposta": "1997",
+            "correcta": false
+          }
+        ],
+        "imatge": "./img/LionKing.jpeg"
+      }
+    ]
+}
