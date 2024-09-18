@@ -8,7 +8,7 @@ fetch('preguntes.json')
 
 let htmlStr='';
 let preguntaActual = 0;
-let TotesRespostes = [];
+let resposta = '';
 
 function mostrarPreguntas() {
  
@@ -20,27 +20,43 @@ function mostrarPreguntas() {
         pregunta.respostes.forEach(resposta => {
             htmlStr += `<button onclick="EnviarResposta(${preguntaActual}, ${resposta.id})">${resposta.resposta}</button><br>`;
         });
+        containerPreguntes.innerHTML = htmlStr;
         preguntaActual++;
-        document.write(htmlStr);
-        
+        console.log('aqui');
   }else{
     htmlStr = '<h1>has finalitzat les preguntes</h1>';
-    document.write(htmlStr);
+    containerPreguntes.innerHTML = htmlStr;
   }
+  
 }
 
 function EnviarResposta(preguntaId, respostaUsuari) {
   console.log(preguntaId, respostaUsuari);
 
   let arreglo = preguntaId + "+" + respostaUsuari;
-  TotesRespostes.push(arreglo);
+  let datosAEnviar = {respuesta: arreglo};
 
-  let index = TotesRespostes.findIndex(respuesta => respuesta.startsWith(preguntaId + "+"));
+  fetch("./back/controller.php", {
+    method: 'POST',
+    headers: {
+      'Content-Type' : 'application/json'
+    },
+    body: JSON.stringify(datosAEnviar)
+  })
+  .then(response=> {
+    if (!response.ok) {
+      throw new Error('Error en la respuesta del servidor');
+    }
+    return response.text();
+  })
+  .then(data => {
+    if (data === 'true') {
+      console.log('Respuesta correcta:', data); 
+    } else {
+      console.log('Respuesta incorrecta o fallida:', data); 
+    }
+  })
 
-  if (index !== -1) {
-    TotesRespostes[index] = arreglo;
-  } else {
-    TotesRespostes.push(arreglo);
-  }
-  console.log(TotesRespostes);
+  console.log(datosAEnviar);
+
 }
