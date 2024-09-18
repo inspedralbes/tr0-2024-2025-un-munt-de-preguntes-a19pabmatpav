@@ -14,15 +14,15 @@ function mostrarPreguntas() {
  
   if (preguntaActual < 10) {
     let pregunta = data.preguntes[preguntaActual];
-        let htmlStr = `<h2>${pregunta.pregunta}</h2>`;
-        htmlStr += `<img src="${pregunta.imatge}" alt="Imatge de la pregunta"><br>`;
-        
-        pregunta.respostes.forEach(resposta => {
-            htmlStr += `<button onclick="EnviarResposta(${preguntaActual}, ${resposta.id})">${resposta.resposta}</button><br>`;
-        });
-        containerPreguntes.innerHTML = htmlStr;
-        preguntaActual++;
-        console.log('aqui');
+    let htmlStr = `<h2>${pregunta.pregunta}</h2>`;
+    htmlStr += `<img src="${pregunta.imatge}" alt="Imatge de la pregunta"><br>`;
+    
+    pregunta.respostes.forEach(resposta => {
+        htmlStr += `<button onclick="EnviarResposta(${preguntaActual}, ${resposta.id})">${resposta.resposta}</button><br>`;
+    });
+    containerPreguntes.innerHTML = htmlStr;
+    preguntaActual++;
+    console.log('aqui');
   }else{
     htmlStr = '<h1>has finalitzat les preguntes</h1>';
     containerPreguntes.innerHTML = htmlStr;
@@ -58,5 +58,5 @@ function EnviarResposta(preguntaId, respostaUsuari) {
   })
 
   console.log(datosAEnviar);
-
+  mostrarPreguntas();
 }
