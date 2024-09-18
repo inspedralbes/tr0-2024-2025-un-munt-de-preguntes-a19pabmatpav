@@ -1,5 +1,5 @@
 let data = {};
-fetch('preguntes.json')
+fetch('../preguntes.json')
   .then (response => response.json())
   .then (fetchedData => {
     data = fetchedData
@@ -36,7 +36,7 @@ function EnviarResposta(preguntaId, respostaUsuari) {
   let arreglo = preguntaId + "+" + respostaUsuari;
   let datosAEnviar = {respuesta: arreglo};
 
-  fetch("./back/controller.php", {
+  fetch("../back/controller.php", {
     method: 'POST',
     headers: {
       'Content-Type' : 'application/json'

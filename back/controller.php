@@ -1,36 +1,30 @@
 <?php
 session_start();
 
-// Ruta del archivo JSON que contiene las preguntas
-$jsonFile = 'preguntes.json';
 
-// Función para cargar preguntas del archivo JSON
+$jsonFile = '../preguntes.json';
+
 function cargarPreguntes() {
     global $jsonFile;
     $jsonData = file_get_contents($jsonFile);
     return json_decode($jsonData, true);
 }
 
-// 1. Preparar las preguntas: selecciona preguntas aleatorias y mezcla las respuestas
 function prepararPreguntes() {
     $data = cargarPreguntes();
     $preguntas = $data['preguntes'];
 
-    // Seleccionamos preguntas aleatorias
     shuffle($preguntas);
 
-    // Mezclar las respuestas de cada pregunta
     foreach ($preguntas as &$pregunta) {
         shuffle($pregunta['respostes']);
     }
 
-    // Guardar las preguntas en la sesión para usarlas más adelante
     $_SESSION['preguntas'] = $preguntas;
 
     return $preguntas;
 }
 
-// 2. Enviar las preguntas al cliente
 function EnviarPreguntes() {
     if (isset($_SESSION['preguntas'])) {
         echo json_encode($_SESSION['preguntas']);
@@ -39,7 +33,6 @@ function EnviarPreguntes() {
     }
 }
 
-// 3. Corregir las respuestas enviadas por el cliente
 function corregirPreguntes($respuestasCliente) {
     $preguntas = $_SESSION['preguntas'];
 
@@ -55,10 +48,9 @@ function corregirPreguntes($respuestasCliente) {
     return true; // Todas las respuestas son correctas
 }
 
-// 4. Reinicializar la sesión del cliente
 function reinicializarSesion() {
-    session_destroy();  // Destruir la sesión actual
-    session_start();    // Iniciar una nueva sesión
+    session_destroy();  
+    session_start();    
 }
 
 // Lógica para manejar las solicitudes del cliente
