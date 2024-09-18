@@ -21,7 +21,7 @@ function prepararPreguntes() {
     }
 
     $_SESSION['preguntas'] = $preguntas;
-
+    echo $preguntas;
     return $preguntas;
 }
 
@@ -38,8 +38,6 @@ function corregirPreguntes($respuestasCliente) {
 
     foreach ($respuestasCliente as $respuesta) {
         list($preguntaId, $respostaUsuari) = explode("+", $respuesta);
-
-        // Comprobar si la respuesta del cliente es correcta
         if ($preguntas[$preguntaId]['respostaCorrecta'] != $respostaUsuari) {
             return false; // La respuesta es incorrecta
         }

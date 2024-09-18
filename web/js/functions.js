@@ -1,5 +1,5 @@
 let data = {};
-fetch('../preguntes.json')
+fetch('../back/controller.php?action=prepararPreguntes')
   .then (response => response.json())
   .then (fetchedData => {
     data = fetchedData
@@ -25,6 +25,7 @@ function mostrarPreguntas() {
     console.log('aqui');
   }else{
     htmlStr = '<h1>has finalitzat les preguntes</h1>';
+    //PONER AQUI BOTON CERRAR SESSION
     containerPreguntes.innerHTML = htmlStr;
   }
   
