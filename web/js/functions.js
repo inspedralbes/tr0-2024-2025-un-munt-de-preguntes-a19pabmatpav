@@ -1,5 +1,5 @@
 let data = {};
-fetch('../back/controller.php?action=prepararPreguntes')
+fetch('http://localhost/tr0-2024-2025-un-munt-de-preguntes-a19pabmatpav/preguntes.json')
   .then (response => response.json())
   .then (fetchedData => {
     data = fetchedData
@@ -22,7 +22,6 @@ function mostrarPreguntas() {
     });
     containerPreguntes.innerHTML = htmlStr;
     preguntaActual++;
-    console.log('aqui');
   }else{
     htmlStr = '<h1>has finalitzat les preguntes</h1>';
     //PONER AQUI BOTON CERRAR SESSION
@@ -35,10 +34,14 @@ function EnviarResposta(preguntaId, respostaUsuari) {
   console.log(preguntaId, respostaUsuari);
 
   let arreglo = preguntaId + "+" + respostaUsuari;
-  let datosAEnviar = {respuesta: arreglo};
-
-  fetch("../back/controller.php", {
+  let datosAEnviar = {
+    action: 'corregirPreguntes', 
+    respuestas: [arreglo]
+  };
+//enviar a metodo :corregirPreguntas
+  fetch("http://localhost/tr0.2024-2025-un-munt-de-preguntes-a19pabmatpav/back/controller.php ", {
     method: 'POST',
+    action: 'corregirPreguntes',
     headers: {
       'Content-Type' : 'application/json'
     },

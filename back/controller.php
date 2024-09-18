@@ -2,7 +2,7 @@
 session_start();
 
 
-$jsonFile = '../preguntes.json';
+$jsonFile = 'http://localhost/tr0-2024-2025-un-munt-de-preguntes-a19pabmatpav/preguntes.json';
 
 function cargarPreguntes() {
     global $jsonFile;
@@ -21,7 +21,6 @@ function prepararPreguntes() {
     }
 
     $_SESSION['preguntas'] = $preguntas;
-    echo $preguntas;
     return $preguntas;
 }
 
@@ -35,7 +34,7 @@ function EnviarPreguntes() {
 
 function corregirPreguntes($respuestasCliente) {
     $preguntas = $_SESSION['preguntas'];
-
+    echo $preguntas;
     foreach ($respuestasCliente as $respuesta) {
         list($preguntaId, $respostaUsuari) = explode("+", $respuesta);
         if ($preguntas[$preguntaId]['respostaCorrecta'] != $respostaUsuari) {
