@@ -7,7 +7,7 @@ Alguns dels punts que han de quedar explicats:
  * Com crees l'entorn de desenvolupament
  * Com desplegues l'aplicació a producció
  * Llistat d'endpoints de l'API de backend
-    * Rutes
+   * Rutes
    * Exemples de JSON de peticó
    * Exemples de JSON de resposta i els seus codis d'estat 200? 404?
 # Wireframe i Flux de pantalles
@@ -18,4 +18,5 @@ Alguns dels punts que han de quedar explicats:
 
 # Tipografía
 [Tipografia per a textos grans](https://www.fontsquirrel.com/fonts/blogger-sans)
-[Tipograafia per a textos petits](https://www.fontsquirrel.com/fonts/Aller)
+
+[Tipografia per a textos petits](https://www.fontsquirrel.com/fonts/Aller)
