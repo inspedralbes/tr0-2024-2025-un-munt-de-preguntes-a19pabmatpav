@@ -85,6 +85,7 @@ function cerrarSesion() {
       console.log('Respuesta del servidor:', data);
       if (data.success) {
         console.log('Sesión reiniciada correctamente');
+        location.reload();
       } else {
         console.error('Error al reiniciar la sesión:', data.error);
       }
