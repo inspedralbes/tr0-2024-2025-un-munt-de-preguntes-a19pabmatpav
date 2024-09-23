@@ -11,9 +11,12 @@ El projecte s'ha de poder desplegar en mode desenvolupament simplement fent dock
 
 # Aquest fitxer ha de contenir com a mínim:
  * Nom dels integrants
+   **Pablo Matamoros Pava
  * Nom del projecte
+   **Un Munt de Preguntes
  * Petita descripció
+   **Una petita aplicació de joc tipus Trivial amb preguntes sobre películes
  * Adreça del gestor de tasques (taiga, jira, trello...)
  * Adreça del prototip gràfic del projecte (Penpot, figma, moqups...)
  * URL de producció (quan la tingueu)
- * Estat: (explicació d'en quin punt està)
+ * Estat: en desenvolupament
