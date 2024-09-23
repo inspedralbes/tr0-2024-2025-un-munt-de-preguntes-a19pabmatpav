@@ -9,6 +9,16 @@ fetch('http://localhost/tr0-2024-2025-un-munt-de-preguntes-a19pabmatpav/pregunte
 let htmlStr = '';
 let preguntaActual = 0;
 let resposta = '';
+let estatDeLaPartida = {
+  preguntasRespondidas: -1
+};
+
+function estatPartida() {
+  const containerEstat = document.getElementById('containerEstat'); // Asegúrate de que este div exista en tu HTML
+  containerEstat.innerHTML = `
+    <h3>Estat de la Partida</h3>
+    <p>Preguntas resposes: ${estatDeLaPartida.preguntasRespondidas}</p>`;
+}
 
 function mostrarPreguntas() {
 
@@ -22,6 +32,8 @@ function mostrarPreguntas() {
     });
     containerPreguntes.innerHTML = htmlStr;
     preguntaActual++;
+    estatDeLaPartida.preguntasRespondidas++;
+    estatPartida();
   } else {
     htmlStr = '<h1>has finalitzat les preguntes</h1>';
     htmlStr += '<button onclick="cerrarSesion()">Cerrar sesión y reiniciar</button>';
