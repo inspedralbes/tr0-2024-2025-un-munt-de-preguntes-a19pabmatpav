@@ -1,0 +1,46 @@
+:root {
+    /* Colores */
+    --color-principal: #292F36; 
+    --color-secundario: #4ECDC4;
+    --color-secundario-oscurecido: #409e98;
+    --color-fondo: #F7FFF7;     
+    /* Tipografías */
+    --font-titulo: 'Blogger Sans', sans-serif; 
+    --font-texto: 'Aller', sans-serif;         
+}
+
+/* Ejemplo de uso */
+body {
+    font-family: var(--font-texto);
+    background-color: var(--color-fondo);
+    color: var(--color-principal);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-titulo);
+    color: var(--color-secundario);
+    text-align: center;
+}
+button {
+    background-color: var(--color-secundario); /* Color de fondo */
+    color: var(--font-texto); /* Color del texto */
+    font-family: var(--font-texto); /* Tipografía */
+    border: 5px solid var(--color-secundario); /* Bordes de 5px */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave para hover */
+}
+
+button:hover {
+    background-color: var(--color-secundario-oscurecido); /* Color de fondo al pasar el mouse */
+    border-color: var(--color-secundario-oscurecido);
+}
+
+img {
+    display: block; 
+    margin: 0 auto; 
+    max-width: 100%; 
+    height: auto; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}

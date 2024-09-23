@@ -37,6 +37,7 @@ function corregirPreguntes($respuestasCliente) {
     echo $preguntas;
     foreach ($respuestasCliente as $respuesta) {
         list($preguntaId, $respostaUsuari) = explode("+", $respuesta);
+        echo $preguntas['respostaCorrecta'];
         if ($preguntas[$preguntaId]['respostaCorrecta'] != $respostaUsuari) {
             return false;
         }
