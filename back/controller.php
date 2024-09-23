@@ -48,7 +48,6 @@ function corregirPreguntes($respuestasCliente) {
 function reinicializarSesion() {
     session_destroy();  
     session_start();
-    $_SESSION['preguntas'] = '';
 }
 
 // Lógica para manejar las solicitudes del cliente
