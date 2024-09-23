@@ -50,10 +50,10 @@ function EnviarResposta(preguntaId, respostaUsuari) {
       if (!response.ok) {
         throw new Error('Error en la respuesta del servidor');
       }
-      return response.text();
+      return response.json();
     })
     .then(data => {
-      const esCorrecta = (data === 'true');
+      const esCorrecta = data.success;
       if (esCorrecta) {
         console.log('Respuesta correcta');
       } else {

@@ -34,17 +34,24 @@ function EnviarPreguntes() {
 
 function corregirPreguntes($respuestasCliente) {
     $preguntas = $_SESSION['preguntas'];
-    echo $preguntas;
+
+    if (!is_array($preguntas)) {
+        return false;
+    }
+
     foreach ($respuestasCliente as $respuesta) {
         list($preguntaId, $respostaUsuari) = explode("+", $respuesta);
-        echo $preguntas['respostaCorrecta'];
+        if (!isset($preguntas[$preguntaId])) {
+            return false; 
+        }
         if ($preguntas[$preguntaId]['respostaCorrecta'] != $respostaUsuari) {
-            return false;
+            return false; 
         }
     }
 
-    return true;
+    return true; 
 }
+
 
 function reinicializarSesion() {
     session_destroy();  
