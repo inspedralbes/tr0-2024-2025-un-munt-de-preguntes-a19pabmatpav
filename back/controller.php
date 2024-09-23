@@ -38,22 +38,24 @@ function corregirPreguntes($respuestasCliente) {
     foreach ($respuestasCliente as $respuesta) {
         list($preguntaId, $respostaUsuari) = explode("+", $respuesta);
         if ($preguntas[$preguntaId]['respostaCorrecta'] != $respostaUsuari) {
-            return false; // La respuesta es incorrecta
+            return false;
         }
     }
 
-    return true; // Todas las respuestas son correctas
+    return true;
 }
 
 function reinicializarSesion() {
     session_destroy();  
-    session_start();    
+    session_start();
+    $_SESSION['preguntas'] = '';
 }
 
 // Lógica para manejar las solicitudes del cliente
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $action = $_POST['action'];
-
+    $postData = json_decode(file_get_contents("php://input"), true);
+    if (isset($postData['action'])) {
+        $action = $postData['action'];
     switch ($action) {
         case 'prepararPreguntes':
             $preguntas = prepararPreguntes();
@@ -79,5 +81,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['error' => 'Acción no válida']);
             break;
     }
-}
+}}
 ?>
