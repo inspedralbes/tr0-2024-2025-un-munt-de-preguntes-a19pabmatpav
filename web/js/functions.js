@@ -1,16 +1,21 @@
 let data = {};
-const action = { action: 'prepararPreguntes' };
-fetch('http://localhost/tr0-2024-2025-un-munt-de-preguntes-a19pabmatpav/back/controller.php', {
+let action = {action: 'prepararPreguntes'};
+fetch('../back/controller.php', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
   },
   body: JSON.stringify(action)
 })
-.then(response => response.json())
-.then(fetchedData => {
-  data = fetchedData;
-  mostrarPreguntas();
+.then(response => response.text()) 
+.then(text => {
+  console.log(text); 
+  try {
+    data = JSON.parse(text); 
+    mostrarPreguntas();
+  } catch (error) {
+    console.error('Error al parsear el JSON:', error); 
+  }
 })
 .catch(error => {
   console.error('Error en la solicitud fetch:', error);

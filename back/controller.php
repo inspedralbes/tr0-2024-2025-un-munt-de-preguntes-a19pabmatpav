@@ -7,49 +7,59 @@ $username = 'root';
 $password = '';   
 
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error en la conexión: " . $e->getMessage());
+    try {
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $pdo;
+    } catch (PDOException $e) {
+        die("Error en la conexión: " . $e->getMessage());
+    }
 }
-}
-$numTotalPreguntes = 10;
-$numTotalRespostes = 4;
+
+
 session_start();
 
-function cargarPreguntes() {
+function cargarPreguntes($numTotalPreguntes, $numTotalRespostes) {
     $pdo = getConnection();
-    $sql = "SELECT id, pregunta, imagen FROM preguntas ORDER BY RAND() LIMIT $numTotalPreguntes"; 
-    $stmt = $pdo->query($sql);
-    
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sql = "SELECT id, pregunta, imatge FROM preguntes ORDER BY RAND() LIMIT :numTotalPreguntes"; 
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':numTotalPreguntes', $numTotalPreguntes, PDO::PARAM_INT); 
+
+    $stmt->execute(); 
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC); 
 }
 
+
 function prepararPreguntes() {
-    $preguntas = cargarPreguntes();
+    $numTotalPreguntes = 10;
+    $numTotalRespostes = 4;
+    $preguntas = cargarPreguntes($numTotalPreguntes, $numTotalRespostes);
     
     $preguntasConRespuestas = [];
-    
+    $pdo = getConnection();
     foreach ($preguntas as $pregunta) {
         $idPregunta = $pregunta['id'];
-        $preguntaImagen = $pregunta['imagen'];
+        $preguntaImagen = $pregunta['imatge'];
 
-        $pdo = getConnection();
-        $sqlRespuestas = "SELECT respuesta FROM respuestas WHERE id_pregunta = :id_pregunta ORDER BY RAND() LIMIT $numTotalRespostes";
+        
+        $sqlRespuestas = "SELECT resposta FROM respostes WHERE id_pregunta = :id_pregunta ORDER BY RAND() LIMIT :numTotalRespostes";
         $stmt = $pdo->prepare($sqlRespuestas);
-        $stmt->execute([':id_pregunta' => $idPregunta]);
+        $stmt->bindParam(':id_pregunta', $idPregunta, PDO::PARAM_INT);
+        $stmt->bindParam(':numTotalRespostes', $numTotalRespostes, PDO::PARAM_INT);
+        $stmt->execute();
         $respuestas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+        
         // Respuestas en un formato simple
         $respuestasList = array_map(function($respuesta) {
-            return $respuesta['respuesta'];
+            return $respuesta['resposta'];
         }, $respuestas);
 
         $preguntasConRespuestas[] = [
-            'id' => $idPregunta,
+            'id_pregunta' => $idPregunta,
             'pregunta' => $pregunta['pregunta'],
-            'imagen' => $preguntaImagen,
+            'imatge' => $preguntaImagen,
             'respuestas' => $respuestasList
         ];
     }
@@ -58,9 +68,11 @@ function prepararPreguntes() {
     foreach ($preguntasConRespuestas as &$pregunta) {
         shuffle($pregunta['respuestas']);
     }
-
+    
     $_SESSION['preguntas'] = $preguntasConRespuestas;
-    return $preguntasConRespuestas;
+    echo $_SESSION['pregunteas'];
+    return json_encode($preguntasConRespuestas);
+    EnviarPreguntes();
 }
 
 
