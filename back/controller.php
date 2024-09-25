@@ -1,8 +1,18 @@
 <?php
+//CONEXION A LA BBDD
+$host = 'localhost';
+$dbname = 'peliculas';
+$username = 'root';  
+$password = '';      
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Error en la conexión: " . $e->getMessage());
+}
+
 session_start();
-
-
-$jsonFile = 'http://localhost/tr0-2024-2025-un-munt-de-preguntes-a19pabmatpav/preguntes.json';
 
 function cargarPreguntes() {
     global $jsonFile;

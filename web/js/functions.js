@@ -14,7 +14,7 @@ let estatDeLaPartida = {
 };
 
 function estatPartida() {
-  const containerEstat = document.getElementById('containerEstat'); // Asegúrate de que este div exista en tu HTML
+  const containerEstat = document.getElementById('containerEstat');
   containerEstat.innerHTML = `
     <h3>Estat de la Partida</h3>
     <p>Preguntas resposes: ${estatDeLaPartida.preguntasRespondidas}</p>`;
