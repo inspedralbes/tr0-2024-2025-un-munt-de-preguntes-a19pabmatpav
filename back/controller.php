@@ -1,9 +1,11 @@
 <?php
+function getConnection(){
 //CONEXION A LA BBDD
 $host = 'localhost';
 $dbname = 'peliculas';
 $username = 'root';  
-$password = '';      
+$password = '';   
+
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -11,28 +13,56 @@ try {
 } catch (PDOException $e) {
     die("Error en la conexión: " . $e->getMessage());
 }
-
+}
+$numTotalPreguntes = 10;
+$numTotalRespostes = 4;
 session_start();
 
 function cargarPreguntes() {
-    global $jsonFile;
-    $jsonData = file_get_contents($jsonFile);
-    return json_decode($jsonData, true);
+    $pdo = getConnection();
+    $sql = "SELECT id, pregunta, imagen FROM preguntas ORDER BY RAND() LIMIT $numTotalPreguntes"; 
+    $stmt = $pdo->query($sql);
+    
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function prepararPreguntes() {
-    $data = cargarPreguntes();
-    $preguntas = $data['preguntes'];
+    $preguntas = cargarPreguntes();
+    
+    $preguntasConRespuestas = [];
+    
+    foreach ($preguntas as $pregunta) {
+        $idPregunta = $pregunta['id'];
+        $preguntaImagen = $pregunta['imagen'];
 
-    shuffle($preguntas);
+        $pdo = getConnection();
+        $sqlRespuestas = "SELECT respuesta FROM respuestas WHERE id_pregunta = :id_pregunta ORDER BY RAND() LIMIT $numTotalRespostes";
+        $stmt = $pdo->prepare($sqlRespuestas);
+        $stmt->execute([':id_pregunta' => $idPregunta]);
+        $respuestas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach ($preguntas as &$pregunta) {
-        shuffle($pregunta['respostes']);
+        // Respuestas en un formato simple
+        $respuestasList = array_map(function($respuesta) {
+            return $respuesta['respuesta'];
+        }, $respuestas);
+
+        $preguntasConRespuestas[] = [
+            'id' => $idPregunta,
+            'pregunta' => $pregunta['pregunta'],
+            'imagen' => $preguntaImagen,
+            'respuestas' => $respuestasList
+        ];
     }
 
-    $_SESSION['preguntas'] = $preguntas;
-    return $preguntas;
+    shuffle($preguntasConRespuestas);
+    foreach ($preguntasConRespuestas as &$pregunta) {
+        shuffle($pregunta['respuestas']);
+    }
+
+    $_SESSION['preguntas'] = $preguntasConRespuestas;
+    return $preguntasConRespuestas;
 }
+
 
 function EnviarPreguntes() {
     if (isset($_SESSION['preguntas'])) {

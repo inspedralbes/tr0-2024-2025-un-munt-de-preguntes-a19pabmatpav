@@ -1,10 +1,20 @@
 let data = {};
-fetch('http://localhost/tr0-2024-2025-un-munt-de-preguntes-a19pabmatpav/preguntes.json')
-  .then(response => response.json())
-  .then(fetchedData => {
-    data = fetchedData
-    mostrarPreguntas()
-  })
+const action = { action: 'prepararPreguntes' };
+fetch('http://localhost/tr0-2024-2025-un-munt-de-preguntes-a19pabmatpav/back/controller.php', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(action)
+})
+.then(response => response.json())
+.then(fetchedData => {
+  data = fetchedData;
+  mostrarPreguntas();
+})
+.catch(error => {
+  console.error('Error en la solicitud fetch:', error);
+});
 
 let htmlStr = '';
 let preguntaActual = 0;
