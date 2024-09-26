@@ -10,6 +10,7 @@ fetch('../back/controller.php', {
 .then(response => response.json()) 
 .then(fetchedData => {
   data = fetchedData;
+  iniciarTemporizador();
   mostrarPreguntas();
 })
 .catch(error => {
@@ -21,6 +22,17 @@ let resposta = '';
 let estatDeLaPartida = {
   preguntasRespondidas: -1
 };
+
+let segundos = 0; 
+let temporizadorElement = document.getElementById('temporizador');
+
+function iniciarTemporizador() {
+    setInterval(() => {
+        segundos++;
+        temporizadorElement.textContent = segundos;
+    }, 1000); 
+}
+
 
 function estatPartida() {
   const containerEstat = document.getElementById('containerEstat');
