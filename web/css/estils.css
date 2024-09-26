@@ -16,24 +16,34 @@ body {
     color: var(--color-principal);
 }
 
+#grid div {
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-areas: 1fr 1fr 2fr 2fr 1fr
+    "blnk   pregunta    blnk",
+    "blnk   estat   blnk",
+    "nav    img    nav",
+    "blnk   respostes   blnk",
+    "blnk   tempo   blnk";
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-titulo);
     color: var(--color-secundario);
     text-align: center;
 }
 button {
-    background-color: var(--color-secundario); /* Color de fondo */
-    color: var(--font-texto); /* Color del texto */
-    font-family: var(--font-texto); /* Tipografía */
-    border: 5px solid var(--color-secundario); /* Bordes de 5px */
-    border-radius: 5px; /* Bordes redondeados */
-    padding: 10px 20px; /* Espaciado interno */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    transition: background-color 0.3s, color 0.3s; /* Transición suave para hover */
+    background-color: var(--color-secundario); 
+    color: var(--font-texto); 
+    font-family: var(--font-texto); 
+    border: 5px solid var(--color-secundario);
+    border-radius: 5px; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    transition: background-color 0.5s, color 0.5s; 
 }
 
 button:hover {
-    background-color: var(--color-secundario-oscurecido); /* Color de fondo al pasar el mouse */
+    background-color: var(--color-secundario-oscurecido);
     border-color: var(--color-secundario-oscurecido);
 }
 
