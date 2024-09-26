@@ -70,7 +70,7 @@ function prepararPreguntes() {
     }
     
     $_SESSION['preguntas'] = $preguntasConRespuestas;
-    echo $_SESSION['pregunteas'];
+    echo $_SESSION['preguntas'];
     return json_encode($preguntasConRespuestas);
     EnviarPreguntes();
 }
