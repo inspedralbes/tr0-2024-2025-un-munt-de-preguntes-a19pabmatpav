@@ -60,25 +60,24 @@ function prepararPreguntes() {
             'id_pregunta' => $idPregunta,
             'pregunta' => $pregunta['pregunta'],
             'imatge' => $preguntaImagen,
-            'respuestas' => $respuestasList
+            'respostes' => $respuestasList
         ];
     }
 
     shuffle($preguntasConRespuestas);
     foreach ($preguntasConRespuestas as &$pregunta) {
-        shuffle($pregunta['respuestas']);
+        shuffle($pregunta['respostes']);
     }
     
     $_SESSION['preguntas'] = $preguntasConRespuestas;
-    echo $_SESSION['preguntas'];
-    return json_encode($preguntasConRespuestas);
+    return $preguntasConRespuestas;
     EnviarPreguntes();
 }
 
 
 function EnviarPreguntes() {
     if (isset($_SESSION['preguntas'])) {
-        echo json_encode($_SESSION['preguntas']);
+        echo $_SESSION['preguntas'];
     } else {
         echo json_encode(['error' => 'No se han preparado las preguntas']);
     }

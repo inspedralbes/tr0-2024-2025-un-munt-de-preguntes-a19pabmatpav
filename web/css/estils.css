@@ -3,7 +3,7 @@
     --color-principal: #292F36; 
     --color-secundario: #4ECDC4;
     --color-secundario-oscurecido: #409e98;
-    --color-fondo: #F7FFF7;     
+    --color-fondo: #ffffff;     
     /* Tipografías */
     --font-titulo: 'Blogger Sans', sans-serif; 
     --font-texto: 'Aller', sans-serif;         
@@ -12,11 +12,11 @@
 /* Ejemplo de uso */
 body {
     font-family: var(--font-texto);
-    background-color: var(--color-fondo);
-    color: var(--color-principal);
+    background-color: var(--color-principal);
+    color: var(--color-secundario);
 }
 
-#grid div {
+/*#grid div {
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-areas: 1fr 1fr 2fr 2fr 1fr
     "blnk   pregunta    blnk",
@@ -24,16 +24,16 @@ body {
     "nav    img    nav",
     "blnk   respostes   blnk",
     "blnk   tempo   blnk";
-}
+}*/
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-titulo);
-    color: var(--color-secundario);
+    color: var(--color---color-secundario);
     text-align: center;
 }
 button {
     background-color: var(--color-secundario); 
-    color: var(--font-texto); 
+    color: var(--color-principal); 
     font-family: var(--font-texto); 
     border: 5px solid var(--color-secundario);
     border-radius: 5px; 
