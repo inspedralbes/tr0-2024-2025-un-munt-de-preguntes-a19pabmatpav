@@ -13,7 +13,7 @@
 body {
     font-family: var(--font-texto);
     background-color: var(--color-principal);
-    color: var(--color-secundario);
+    color: var(--color-secundario-oscurecido);
 }
 
 /*#grid div {
@@ -25,6 +25,22 @@ body {
     "blnk   respostes   blnk",
     "blnk   tempo   blnk";
 }*/
+
+#containerPreguntes {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.respuestas-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(2, auto);
+    gap: 10px;
+    margin-top: 20px; 
+}
+
+
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-titulo);

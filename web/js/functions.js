@@ -38,10 +38,11 @@ console.log(data);
       let htmlStr = `<h2>${pregunta.pregunta}</h2>`;
       htmlStr += `<img src="${pregunta.imatge}" alt="Imatge de la pregunta"><br>`;
 
-       
+      htmlStr += '<div class="respuestas-container">';
       pregunta.respostes.forEach(respuesta => { 
-          htmlStr += `<button onclick="EnviarResposta(${pregunta.id_pregunta}, '${respuesta}')">${respuesta}</button><br>`;
+          htmlStr += `<button onclick="EnviarResposta(${pregunta.id_pregunta}, '${respuesta}')">${respuesta}</button>`;
       });
+      htmlStr += '</div>'; 
 
       containerPreguntes.innerHTML = htmlStr; 
       preguntaActual++; 
