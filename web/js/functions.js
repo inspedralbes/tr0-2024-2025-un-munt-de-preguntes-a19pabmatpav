@@ -26,14 +26,26 @@ fetch('../back/controller.php', {
   console.error('Error en la solicitud fetch o al parsear el JSON:', error);
 });
 
-let temporizadorElement = document.getElementById('temporizador');
+let temporizadorElement = document.getElementById('containerTempo');
+
 function iniciarTemporizador() {
-    setInterval(() => {
-        segundos++;
-        temporizadorElement.textContent = segundos;
-    }, 1000); 
+  temporizadorID = setInterval(() => { 
+      segundos++;
+      temporizadorElement.textContent = segundos;
+      if (segundos >= 30) {
+          finalizarJuego(); 
+      }
+  }, 1000); 
 }
 
+function finalizarJuego() {
+  clearInterval(temporizadorID);
+  temporizadorElement.textContent = '';
+  temporizadorElement.classList.add('hidden');
+  temporizadorElement.style.display = 'none';
+  containerPreguntes.innerHTML = '<h1>¡El tiempo ha finalizado!</h1>';
+  containerPreguntes.innerHTML += '<button onclick="cerrarSesion()">Cerrar sesión y reiniciar</button>';
+}
 
 function estatPartida() {
   const containerEstat = document.getElementById('containerEstat');

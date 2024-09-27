@@ -16,6 +16,10 @@ body {
     color: var(--color-secundario-oscurecido);
 }
 
+.hiden{
+    display: none;
+}
+
 /*#grid div {
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-areas: 1fr 1fr 2fr 2fr 1fr
