@@ -51,7 +51,7 @@ function estatPartida() {
   const containerEstat = document.getElementById('containerEstat');
   containerEstat.innerHTML = `
     <h3>Estat de la Partida</h3>
-    <p>Preguntas respostes: ${estatDeLaPartida.preguntasRespondidas}</p>`;
+    <p>Respostes: ${estatDeLaPartida.preguntasRespondidas}</p>`;
 }
 
 function mostrarPreguntas() {
