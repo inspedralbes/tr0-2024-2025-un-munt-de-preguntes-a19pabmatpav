@@ -3,7 +3,8 @@ let htmlStr = '';
 let preguntaActual = 0;
 let resposta = '';
 let estatDeLaPartida = {
-  preguntasRespondidas: 0
+  preguntasRespondidas: 0,
+  respuestas: {}
 };
 let segundos = 0; 
 let action = {action: 'prepararPreguntes'};
@@ -27,6 +28,7 @@ fetch('../back/controller.php', {
 });
 
 let temporizadorElement = document.getElementById('containerTempo');
+let containerPreguntes = document.getElementById('containerPreguntes');
 
 function iniciarTemporizador() {
   temporizadorID = setInterval(() => { 
@@ -61,22 +63,32 @@ console.log(data);
   if (estatDeLaPartida.preguntasRespondidas < data.length) { 
       let pregunta = data[preguntaActual]; 
       let htmlStr = `<h2>${pregunta.pregunta}</h2>`;
-      htmlStr += `<button class="boton-lateral" onclick="cambiarPregunta(-1)">⬅</button>`;
+      htmlStr += `<button class="boton-lateral" id="prevBtn">⬅</button>`;
       htmlStr += `<img src="${pregunta.imatge}" alt="Imatge de la pregunta">`;
-      htmlStr += `<button class="boton-lateral" onclick="cambiarPregunta(1)">➡</button>`;
+      htmlStr += `<button class="boton-lateral" id="postBtn">➡</button>`;
 
-      htmlStr += '<div class="respuestas-container">';
+      htmlStr += '<div class="respuestas-container" id="respuestasContainer">';
       pregunta.respostes.forEach(respuesta => { 
-          htmlStr += `<button onclick="EnviarResposta(${pregunta.id_pregunta}, '${respuesta}')">${respuesta}</button>`;
+          htmlStr += `<button class="respuestaBtn">${respuesta}</button>`;
       });
       htmlStr += '</div>'; 
 
       containerPreguntes.innerHTML = htmlStr; 
       estatPartida();
+      document.getElementById('prevBtn').addEventListener('click', () => cambiarPregunta(-1));
+      document.getElementById('postBtn').addEventListener('click', () => cambiarPregunta(1));
+      const respuestaBtns = document.querySelectorAll('.respuestaBtn');
+        respuestaBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const respuestaUsuari = btn.textContent;
+                EnviarResposta(pregunta.id_pregunta, respuestaUsuari);
+            });
+        });
   } else {
       let htmlStr = '<h1>has finalitzat les preguntes</h1>';
-      htmlStr += '<button onclick="cerrarSesion()">Cerrar sesión y reiniciar</button>';
+      htmlStr += '<button id="cerrarSesionBtn">Cerrar sesión y reiniciar</button>';
       containerPreguntes.innerHTML = htmlStr;
+      document.getElementById('cerrarSesionBtn').addEventListener('click', cerrarSesion);
   }
 }
 
@@ -93,6 +105,12 @@ function cambiarPregunta(direccion) {
 
 function EnviarResposta(preguntaId, respostaUsuari) {
   console.log(preguntaId, respostaUsuari);
+
+  if (!estatDeLaPartida.respuestas[preguntaId]) {
+    estatDeLaPartida.preguntasRespondidas++;
+  }
+
+  estatDeLaPartida.respuestas[preguntaId] = respostaUsuari;
 
   let arreglo = preguntaId + "+" + respostaUsuari;
   let datosAEnviar = {
@@ -120,8 +138,8 @@ function EnviarResposta(preguntaId, respostaUsuari) {
       } else {
         console.log('Respuesta incorrecta');
       }
-      estatDeLaPartida.preguntasRespondidas++;
-      if (preguntaActual >= data.length - 1) {
+      
+      if (estatDeLaPartida.preguntasRespondidas >= data.length) {
         mostrarMensajeFinal();
       } else {
         mostrarPreguntas();
@@ -133,6 +151,7 @@ function EnviarResposta(preguntaId, respostaUsuari) {
 
   console.log(datosAEnviar);
 }
+
 
 function cerrarSesion() {
   fetch("../back/controller.php", {
