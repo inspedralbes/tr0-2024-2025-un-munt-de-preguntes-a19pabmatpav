@@ -1,5 +1,14 @@
 let data = {};
+let htmlStr = '';
+let preguntaActual = 0;
+let resposta = '';
+let estatDeLaPartida = {
+  preguntasRespondidas: 0
+};
+let segundos = 0; 
 let action = {action: 'prepararPreguntes'};
+
+//Fetch inicial
 fetch('../back/controller.php', {
   method: 'POST',
   headers: {
@@ -16,16 +25,8 @@ fetch('../back/controller.php', {
 .catch(error => {
   console.error('Error en la solicitud fetch o al parsear el JSON:', error);
 });
-let htmlStr = '';
-let preguntaActual = 0;
-let resposta = '';
-let estatDeLaPartida = {
-  preguntasRespondidas: -1
-};
 
-let segundos = 0; 
 let temporizadorElement = document.getElementById('temporizador');
-
 function iniciarTemporizador() {
     setInterval(() => {
         segundos++;
@@ -45,10 +46,12 @@ function mostrarPreguntas() {
 
 console.log(data);
 
-  if (preguntaActual < data.length) { 
+  if (estatDeLaPartida.preguntasRespondidas < data.length) { 
       let pregunta = data[preguntaActual]; 
       let htmlStr = `<h2>${pregunta.pregunta}</h2>`;
-      htmlStr += `<img src="${pregunta.imatge}" alt="Imatge de la pregunta"><br>`;
+      htmlStr += `<button class="boton-lateral" onclick="cambiarPregunta(-1)">⬅</button>`;
+      htmlStr += `<img src="${pregunta.imatge}" alt="Imatge de la pregunta">`;
+      htmlStr += `<button class="boton-lateral" onclick="cambiarPregunta(1)">➡</button>`;
 
       htmlStr += '<div class="respuestas-container">';
       pregunta.respostes.forEach(respuesta => { 
@@ -57,8 +60,6 @@ console.log(data);
       htmlStr += '</div>'; 
 
       containerPreguntes.innerHTML = htmlStr; 
-      preguntaActual++; 
-      estatDeLaPartida.preguntasRespondidas++;
       estatPartida();
   } else {
       let htmlStr = '<h1>has finalitzat les preguntes</h1>';
@@ -67,6 +68,16 @@ console.log(data);
   }
 }
 
+function cambiarPregunta(direccion) {
+  preguntaActual += direccion;
+
+  if (preguntaActual < 0) {
+    preguntaActual = 0;
+  } else if (preguntaActual >= data.length) {
+    preguntaActual = data.length - 1; 
+  }
+  mostrarPreguntas();
+}
 
 function EnviarResposta(preguntaId, respostaUsuari) {
   console.log(preguntaId, respostaUsuari);
@@ -97,7 +108,12 @@ function EnviarResposta(preguntaId, respostaUsuari) {
       } else {
         console.log('Respuesta incorrecta');
       }
-      mostrarPreguntas();
+      estatDeLaPartida.preguntasRespondidas++;
+      if (preguntaActual >= data.length - 1) {
+        mostrarMensajeFinal();
+      } else {
+        mostrarPreguntas();
+      }
     })
     .catch(error => {
       console.error('Error en el envío de la respuesta:', error);
