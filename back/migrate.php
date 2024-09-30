@@ -11,6 +11,7 @@ try {
 } catch (PDOException $e) {
     die("Error en la conexión: " . $e->getMessage());
 }
+
 $jsonFile = '/opt/lampp/htdocs/tr0-2024-2025-un-munt-de-preguntes-a19pabmatpav/preguntes.json';
 
 insertarPreguntasDesdeJson($jsonFile, $pdo);
