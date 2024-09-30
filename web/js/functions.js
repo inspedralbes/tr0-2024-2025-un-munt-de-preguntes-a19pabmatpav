@@ -77,6 +77,18 @@ console.log(data);
       estatPartida();
       document.getElementById('prevBtn').addEventListener('click', () => cambiarPregunta(-1));
       document.getElementById('postBtn').addEventListener('click', () => cambiarPregunta(1));
+
+      if (preguntaActual === 0) {
+        prevBtn.style.display = 'none'; 
+      } else {
+        prevBtn.style.display = 'inline'; 
+      }
+  
+      if (preguntaActual === data.length - 1) {
+        postBtn.style.display = 'none'; 
+      } else {
+        postBtn.style.display = 'inline'; 
+      }
       const respuestaBtns = document.querySelectorAll('.respuestaBtn');
         respuestaBtns.forEach(btn => {
             btn.addEventListener('click', () => {
