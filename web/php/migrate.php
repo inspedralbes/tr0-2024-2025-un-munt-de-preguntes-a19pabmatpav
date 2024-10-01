@@ -1,9 +1,9 @@
 <?php
 //CONEXION A LA BBDD
 $host = 'localhost';
-$dbname = 'peliculas';
-$username = 'root';  
-$password = '';      
+$dbname = 'pelicules';
+$username = 'a19pabmatpav_db';  
+$password = 'Paccorabane2';      
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -12,7 +12,7 @@ try {
     die("Error en la conexión: " . $e->getMessage());
 }
 
-$jsonFile = '/opt/lampp/htdocs/tr0-2024-2025-un-munt-de-preguntes-a19pabmatpav/preguntes.json';
+$jsonFile = '/web/a19pabmatpav.daw.inspedralbes.cat/public_html/tr0-2024-2025-un-munt-de-preguntes-a19pabmatpav/preguntes.json';
 
 insertarPreguntasDesdeJson($jsonFile, $pdo);
 
