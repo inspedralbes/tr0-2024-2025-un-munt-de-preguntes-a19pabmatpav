@@ -10,7 +10,7 @@ let segundos = 0;
 let action = {action: 'prepararPreguntes'};
 
 //Fetch inicial
-fetch('../back/controller.php', {
+fetch("./php/controller.php", {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -130,7 +130,7 @@ function EnviarResposta(preguntaId, respostaUsuari) {
     respuestas: [arreglo]
   };
 
-  fetch("../back/controller.php", {
+  fetch("./php/controller.php", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -166,7 +166,7 @@ function EnviarResposta(preguntaId, respostaUsuari) {
 
 
 function cerrarSesion() {
-  fetch("../back/controller.php", {
+  fetch("./php/controller.php", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
