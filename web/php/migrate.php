@@ -1,6 +1,6 @@
 <?php
 //CONEXION A LA BBDD
-$host = 'localhost';
+$host = 'daw.inspedralbes.cat';
 $dbname = 'pelicules';
 $username = 'a19pabmatpav_db';  
 $password = 'Paccorabane2';      
