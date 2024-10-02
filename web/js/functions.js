@@ -8,27 +8,46 @@ let estatDeLaPartida = {
 };
 let segundos = 0; 
 let action = {action: 'prepararPreguntes'};
-
-//Fetch inicial
-fetch("./php/controller.php", {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(action)
-})
-.then(response => response.json()) 
-.then(fetchedData => {
-  data = fetchedData;
-  iniciarTemporizador();
-  mostrarPreguntas();
-})
-.catch(error => {
-  console.error('Error en la solicitud fetch o al parsear el JSON:', error);
-});
-
+let nombreUsuario = '';
+let numeroPreguntas = 0;
+let configuracionJuego = document.getElementById('configuracionJuego');
+let iniciarJuegoBtn = document.getElementById('iniciarJuegoBtn');
 let temporizadorElement = document.getElementById('containerTempo');
 let containerPreguntes = document.getElementById('containerPreguntes');
+
+iniciarJuegoBtn.addEventListener('click', () => {
+  nombreUsuario = document.getElementById('nombreUsuario').value;
+  numeroPreguntas = parseInt(document.getElementById('numeroPreguntas').value);
+
+  if (nombreUsuario && numeroPreguntas > 0) {
+      configuracionJuego.style.display = 'none';
+      document.getElementById('partida').style.display = 'block';
+      fetchPreguntas();
+  } else {
+      alert('Por favor, introduce tu nombre y un número de preguntas válido.');
+  }
+});
+
+function fetchPreguntas() {
+  let action = { action: 'prepararPreguntes', cantidad: numeroPreguntas };
+
+  fetch("./php/controller.php", {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(action)
+  })
+  .then(response => response.json())
+  .then(fetchedData => {
+      data = fetchedData;
+      iniciarTemporizador();
+      mostrarPreguntas();
+  })
+  .catch(error => {
+      console.error('Error en la solicitud fetch o al parsear el JSON:', error);
+  });
+}
 
 function iniciarTemporizador() {
   temporizadorID = setInterval(() => { 
@@ -45,7 +64,8 @@ function finalizarJuego() {
   temporizadorElement.textContent = '';
   temporizadorElement.classList.add('hidden');
   temporizadorElement.style.display = 'none';
-  containerPreguntes.innerHTML = '<h1>¡El tiempo ha finalizado!</h1>';
+  containerPreguntes.innerHTML = `<h1>¡El tiempo ha finalizado, ${nombreUsuario}!</h1>`;
+  containerPreguntes.innerHTML += `<p>Puntuación: ${estatDeLaPartida.preguntasRespondidas} de ${numeroPreguntas}</p>`;
   containerPreguntes.innerHTML += '<button onclick="cerrarSesion()">Cerrar sesión y reiniciar</button>';
 }
 

@@ -6,7 +6,6 @@ $dbname = 'peliculas';
 $username = 'root';  
 $password = '';   
 
-
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -15,7 +14,6 @@ $password = '';
         die("Error en la conexión: " . $e->getMessage());
     }
 }
-
 
 session_start();
 
@@ -32,8 +30,8 @@ function cargarPreguntes($numTotalPreguntes, $numTotalRespostes) {
 }
 
 
-function prepararPreguntes() {
-    $numTotalPreguntes = 10;
+function prepararPreguntes($numeroPreguntas) {
+    $numTotalPreguntes = $numeroPreguntas;
     $numTotalRespostes = 4;
     $preguntas = cargarPreguntes($numTotalPreguntes, $numTotalRespostes);
     
@@ -116,7 +114,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $action = $postData['action'];
     switch ($action) {
         case 'prepararPreguntes':
-            $preguntas = prepararPreguntes();
+            $cantidad = isset($requestData['cantidad']) ? $requestData['cantidad'] : null;
+            $preguntas = prepararPreguntes($cantidad);
             echo json_encode($preguntas);
             break;
 

@@ -8,13 +8,22 @@
 </head>
 <body>
     <h1>MovieRoulette</h1>
-    <div id="partida">
+    <div id="configuracionJuego">
+        <label for="nombreUsuario">Nombre del usuario:</label>
+        <input type="text" id="nombreUsuario" required>
+        <label for="numeroPreguntas">Número de preguntas:</label>
+        <input type="number" id="numeroPreguntas" min="1" max="10" required>
+        <button id="iniciarJuegoBtn">Iniciar Juego</button>
+    </div>
+    
+    <div id="partida" style="display:none;">
         <div id="containerEstat"></div>
         <div id="containerPreguntes"></div>
         <div id="containerTempo" class="circular-container">
             <p id="temporizador">0</p>
         </div>
-    </div>  
+    </div>
+    
     
     <script src="./js/functions.js"></script>
 </body>
