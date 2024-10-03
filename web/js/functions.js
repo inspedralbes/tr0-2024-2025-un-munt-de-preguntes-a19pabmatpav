@@ -24,7 +24,7 @@ iniciarJuegoBtn.addEventListener('click', () => {
       configuracionJuego.style.display = 'none';
       document.getElementById('partida').style.display = 'block';
       fetchPreguntas();
-      localStorage.setItem("name", nombreUsuario);
+      //localStorage.setItem("name", nombreUsuario);
   } else {
       alert('Por favor, introduce tu nombre y un número de preguntas válido.');
   }
