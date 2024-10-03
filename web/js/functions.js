@@ -23,6 +23,7 @@ iniciarJuegoBtn.addEventListener('click', () => {
       configuracionJuego.style.display = 'none';
       document.getElementById('partida').style.display = 'block';
       fetchPreguntas();
+      localStorage.setItem("name", nombreUsuario);
   } else {
       alert('Por favor, introduce tu nombre y un número de preguntas válido.');
   }
@@ -59,16 +60,6 @@ function iniciarTemporizador() {
   }, 1000); 
 }
 
-function finalizarJuego() {
-  clearInterval(temporizadorID);
-  temporizadorElement.textContent = '';
-  temporizadorElement.classList.add('hidden');
-  temporizadorElement.style.display = 'none';
-  containerPreguntes.innerHTML = `<h1>¡El tiempo ha finalizado, ${nombreUsuario}!</h1>`;
-  containerPreguntes.innerHTML += `<p>Puntuación: ${estatDeLaPartida.preguntasRespondidas} de ${numeroPreguntas}</p>`;
-  containerPreguntes.innerHTML += '<button onclick="cerrarSesion()">Cerrar sesión y reiniciar</button>';
-}
-
 function estatPartida() {
   const containerEstat = document.getElementById('containerEstat');
   containerEstat.innerHTML = `
@@ -77,7 +68,6 @@ function estatPartida() {
 }
 
 function mostrarPreguntas() {
-
 console.log(data);
 
   if (estatDeLaPartida.preguntasRespondidas < data.length) { 
@@ -117,6 +107,8 @@ console.log(data);
             });
         });
   } else {
+      const containerEstat = document.getElementById('containerEstat');
+      containerEstat.style.display = 'none';
       let htmlStr = '<h1>has finalitzat les preguntes</h1>';
       htmlStr += '<button id="cerrarSesionBtn">Cerrar sesión y reiniciar</button>';
       containerPreguntes.innerHTML = htmlStr;
@@ -184,6 +176,15 @@ function EnviarResposta(preguntaId, respostaUsuari) {
   console.log(datosAEnviar);
 }
 
+function finalizarJuego() {
+  clearInterval(temporizadorID);
+  temporizadorElement.textContent = '';
+  temporizadorElement.classList.add('hidden');
+  temporizadorElement.style.display = 'none';
+  containerPreguntes.innerHTML = `<h1>¡El tiempo ha finalizado, ${nombreUsuario}!</h1>`;
+  containerPreguntes.innerHTML += `<p>Puntuación: ${estatDeLaPartida.preguntasRespondidas} de ${numeroPreguntas}</p>`;
+  containerPreguntes.innerHTML += '<button onclick="cerrarSesion()">Cerrar sesión y reiniciar</button>';
+}
 
 function cerrarSesion() {
   fetch("./php/controller.php", {

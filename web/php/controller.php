@@ -29,31 +29,25 @@ function cargarPreguntes($numTotalPreguntes, $numTotalRespostes) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC); 
 }
 
-
 function prepararPreguntes($numeroPreguntas) {
     $numTotalPreguntes = $numeroPreguntas;
     $numTotalRespostes = 4;
     $preguntas = cargarPreguntes($numTotalPreguntes, $numTotalRespostes);
-    
     $preguntasConRespuestas = [];
     $pdo = getConnection();
+
     foreach ($preguntas as $pregunta) {
         $idPregunta = $pregunta['id'];
         $preguntaImagen = $pregunta['imatge'];
-
-        
         $sqlRespuestas = "SELECT resposta FROM respostes WHERE id_pregunta = :id_pregunta ORDER BY RAND() LIMIT :numTotalRespostes";
         $stmt = $pdo->prepare($sqlRespuestas);
         $stmt->bindParam(':id_pregunta', $idPregunta, PDO::PARAM_INT);
         $stmt->bindParam(':numTotalRespostes', $numTotalRespostes, PDO::PARAM_INT);
         $stmt->execute();
         $respuestas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        // Respuestas en un formato simple
         $respuestasList = array_map(function($respuesta) {
             return $respuesta['resposta'];
         }, $respuestas);
-
         $preguntasConRespuestas[] = [
             'id_pregunta' => $idPregunta,
             'pregunta' => $pregunta['pregunta'],
@@ -61,17 +55,13 @@ function prepararPreguntes($numeroPreguntas) {
             'respostes' => $respuestasList
         ];
     }
-
     shuffle($preguntasConRespuestas);
     foreach ($preguntasConRespuestas as &$pregunta) {
         shuffle($pregunta['respostes']);
     }
-    
     $_SESSION['preguntas'] = $preguntasConRespuestas;
     return $preguntasConRespuestas;
-    EnviarPreguntes();
 }
-
 
 function EnviarPreguntes() {
     if (isset($_SESSION['preguntas'])) {
@@ -112,12 +102,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $postData = json_decode(file_get_contents("php://input"), true);
     if (isset($postData['action'])) {
         $action = $postData['action'];
-    switch ($action) {
-        case 'prepararPreguntes':
-            $cantidad = isset($requestData['cantidad']) ? $requestData['cantidad'] : null;
-            $preguntas = prepararPreguntes($cantidad);
-            echo json_encode($preguntas);
-            break;
+        switch ($action) {
+            case 'prepararPreguntes':
+                $requestData = json_decode(file_get_contents('php://input'), true);
+                if (isset($requestData['action']) && $requestData['action'] === 'prepararPreguntes') {
+                    $cantidad = isset($requestData['cantidad']) ? $requestData['cantidad'] : null;
+                    if ($cantidad !== null) {
+                        $preguntas = prepararPreguntes($cantidad);
+                        echo json_encode($preguntas);
+                    } else {
+                        echo json_encode(['error' => 'Cantidad de preguntas no especificada']);
+                    }
+                }
+                break;
 
         case 'EnviarPreguntes':
             EnviarPreguntes();
