@@ -25,7 +25,7 @@ body {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: repeat(6, 1fr);
     grid-template-areas:
-        ". containerPreguntes containerPreguntes ."
+        ". containerPregunta containerPregunta ."
         ". containerEstat containerEstat ."
         "prevBtn containerImagen containerImagen postBtn"
         "prevBtn containerImagen containerImagen postBtn"
@@ -36,12 +36,21 @@ body {
 }
 
 #containerPreguntes {
-    grid-area: containerPreguntes;
-    text-align: center;
     background-color: var(--color-fondo);
     padding: 10px;
-    border-radius: 5px; 
+    border-radius: 5px;
     max-width: 70vw;
+    margin: 0 auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+#containerPregunta {
+    grid-area: containerPregunta;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px; 
 }
 
 #containerEstat {
@@ -74,6 +83,15 @@ body {
     background-color: var(--color-fondo);
     padding: 10px;
     border-radius: 5px;
+}
+
+#configuracionJuego {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    justify-content: center; 
+    height: 100vh;          
+    margin: 0;              
 }
 
 #containerTempo {
@@ -116,6 +134,8 @@ img {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
+
+
 .circular-container {
     width: 100px; 
     height: 100px; 
@@ -134,10 +154,12 @@ h1, h2, h3, h4, h5, h6, p {
     color: var(--color-principal); 
     text-align: center;
 }
+
 #gestor, h1, h2{
     align-content: center;
     color: var(--color-secundario);
 }
+
 .form-container {
     display: flex;
     flex-direction:row;
@@ -147,6 +169,7 @@ h1, h2, h3, h4, h5, h6, p {
     background-color: var(--color-principal); 
     padding: 20px;
 }
+
 form input, form textarea, form select {
     border-radius: 5px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 

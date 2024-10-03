@@ -6,6 +6,7 @@ let estatDeLaPartida = {
   preguntasRespondidas: 0,
   respuestas: {}
 };
+let temporizadorID;
 let segundos = 0; 
 let action = {action: 'prepararPreguntes'};
 let nombreUsuario = '';
@@ -60,6 +61,11 @@ function iniciarTemporizador() {
   }, 1000); 
 }
 
+function finalizarTemporizador() {
+  clearInterval(temporizadorID); 
+  segundos = 0; 
+}
+
 function estatPartida() {
   const containerEstat = document.getElementById('containerEstat');
   containerEstat.innerHTML = `
@@ -71,20 +77,20 @@ function mostrarPreguntas() {
 console.log(data);
 
   if (estatDeLaPartida.preguntasRespondidas < data.length) { 
-      let pregunta = data[preguntaActual]; 
-      let htmlStr = `<h2>${pregunta.pregunta}</h2>`;
-      htmlStr += `<button class="boton-lateral" id="prevBtn">⬅</button>`;
-      htmlStr += `<img src="${pregunta.imatge}" alt="Imatge de la pregunta">`;
-      htmlStr += `<button class="boton-lateral" id="postBtn">➡</button>`;
+    let pregunta = data[preguntaActual]; 
+    let htmlStr = `<div id="containerPregunta"><h2>${pregunta.pregunta}</h2></div>`;
 
-      htmlStr += '<div class="respuestas-container" id="respuestasContainer">';
-      pregunta.respostes.forEach(respuesta => { 
-          htmlStr += `<button class="respuestaBtn">${respuesta}</button>`;
-      });
-      htmlStr += '</div>'; 
+    htmlStr += `<div id="prevBtn"><button class="boton-lateral">⬅</button></div>`;
+    htmlStr += `<div id="containerImagen"><img src="${pregunta.imatge}" alt="Imatge de la pregunta"></div>`;
+    htmlStr += `<div id="postBtn"><button class="boton-lateral">➡</button></div>`;
+    htmlStr += '<div id="containerRespuestas"><div class="respuestas-container" id="respuestasContainer">';
+    pregunta.respostes.forEach(respuesta => { 
+      htmlStr += `<button class="respuestaBtn">${respuesta}</button>`;
+    });
+    htmlStr += '</div></div>'; 
 
-      containerPreguntes.innerHTML = htmlStr; 
-      estatPartida();
+    containerPreguntes.innerHTML = htmlStr; 
+    estatPartida();
       document.getElementById('prevBtn').addEventListener('click', () => cambiarPregunta(-1));
       document.getElementById('postBtn').addEventListener('click', () => cambiarPregunta(1));
 
@@ -109,7 +115,8 @@ console.log(data);
   } else {
       const containerEstat = document.getElementById('containerEstat');
       containerEstat.style.display = 'none';
-      let htmlStr = '<h1>has finalitzat les preguntes</h1>';
+      let htmlStr = `<h1>has finalitzat les preguntes, ${nombreUsuario}</h1>`;
+      finalizarTemporizador();
       htmlStr += '<button id="cerrarSesionBtn">Cerrar sesión y reiniciar</button>';
       containerPreguntes.innerHTML = htmlStr;
       document.getElementById('cerrarSesionBtn').addEventListener('click', cerrarSesion);
