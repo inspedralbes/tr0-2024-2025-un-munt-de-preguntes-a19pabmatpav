@@ -116,6 +116,7 @@ console.log(data);
       const containerEstat = document.getElementById('containerEstat');
       containerEstat.style.display = 'none';
       let htmlStr = `<h1>has finalitzat les preguntes, ${nombreUsuario}</h1>`;
+      containerPreguntes.innerHTML += `<p>Puntuació: ${estatDeLaPartida.preguntasRespondidas} de ${numeroPreguntas}</p>`;
       finalizarTemporizador();
       htmlStr += '<button id="cerrarSesionBtn">Cerrar sesión y reiniciar</button>';
       containerPreguntes.innerHTML = htmlStr;
@@ -188,9 +189,9 @@ function finalizarJuego() {
   temporizadorElement.textContent = '';
   temporizadorElement.classList.add('hidden');
   temporizadorElement.style.display = 'none';
-  containerPreguntes.innerHTML = `<h1>¡El tiempo ha finalizado, ${nombreUsuario}!</h1>`;
-  containerPreguntes.innerHTML += `<p>Puntuación: ${estatDeLaPartida.preguntasRespondidas} de ${numeroPreguntas}</p>`;
-  containerPreguntes.innerHTML += '<button onclick="cerrarSesion()">Cerrar sesión y reiniciar</button>';
+  containerPreguntes.innerHTML = `<h1>¡El temps ha finalitzat, ${nombreUsuario}!</h1>`;
+  containerPreguntes.innerHTML += `<p>Puntuació: ${estatDeLaPartida.preguntasRespondidas} de ${numeroPreguntas}</p>`;
+  containerPreguntes.innerHTML += '<button onclick="cerrarSesion()">Tancar sesió i reiniciar</button>';
 }
 
 function cerrarSesion() {
