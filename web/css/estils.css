@@ -1,0 +1,209 @@
+:root {
+    /* Colores */
+    --color-principal: #292F36; 
+    --color-secundario: #4ECDC4;
+    --color-secundario-oscurecido: #409e98;
+    --color-fondo: #ffffff;     
+    /* Tipografías */
+    --font-titulo: 'Blogger Sans', sans-serif; 
+    --font-texto: 'Aller', sans-serif;         
+}
+
+/* Ejemplo de uso */
+body {
+    font-family: var(--font-texto);
+    background-color: var(--color-principal);
+    color: var(--color-secundario-oscurecido);
+    height: 100vh;
+}
+
+.hiden {
+    display: none;
+}
+
+#partida {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-areas:
+        ". containerPregunta containerPregunta ."
+        ". containerEstat containerEstat ."
+        "prevBtn containerImagen containerImagen postBtn"
+        "prevBtn containerImagen containerImagen postBtn"
+        ". containerRespuestas containerRespuestas ."
+        ". containerTempo containerTempo .";
+    gap: 5px;
+}
+
+#containerPreguntes {
+    background-color: var(--color-fondo);
+    padding: 5px;
+    border-radius: 5px;
+    max-width: 70vw;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 90vh; 
+    height: auto; 
+    overflow: hidden; 
+}
+
+
+#containerPregunta {
+    grid-area: containerPregunta;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px; 
+}
+
+#containerEstat {
+    grid-area: containerEstat;
+    display: grid;
+    text-align: center;
+    background-color: var(--color-secundario);
+    border-radius: 5px;
+    height: 80px;
+    width: 70vw; 
+    margin: 0 auto; 
+    line-height: 0;
+  }
+  
+
+.containerImagen {
+    grid-area: containerImagen;
+    text-align: center;
+    background-color: var(--color-fondo);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.respuestas-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(2, auto);
+    gap: 10px;
+    margin-top: 20px; 
+}
+
+.containerRespuestas {
+    grid-area: containerRespuestas;
+    text-align: center;
+    background-color: var(--color-fondo);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#configuracionJuego {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    justify-content: center; 
+    height: 100vh;          
+    margin: 0;              
+}
+
+#containerTempo {
+    grid-area: containerTempo;
+    text-align: center;
+    padding: 10px;
+}
+
+.prevBtn {
+    grid-area: prevBtn;
+    background-color: var(--color-secundario);
+}
+
+.postBtn {
+    grid-area: postBtn;
+    background-color: var(--color-secundario);
+}
+
+button {
+    background-color: var(--color-secundario); 
+    color: var(--color-principal); 
+    font-family: var(--font-texto); 
+    border: 5px solid var(--color-secundario);
+    border-radius: 5px; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    transition: background-color 0.5s, color 0.5s; 
+}
+
+button:hover {
+    background-color: var(--color-secundario-oscurecido);
+    border-color: var(--color-secundario-oscurecido);
+}
+
+img {
+    display: block; 
+    margin: 0 auto; 
+    max-width: 100%; 
+    height: auto; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+
+
+.circular-container {
+    width: 80px; 
+    height: 80px; 
+    border-radius: 50%; 
+    background-color: var(--color-secundario-oscurecido); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin: 5px auto; 
+    color: var(--color-principal); 
+    font-size: 24px; 
+}
+
+h1{
+    margin: 5px;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    font-family: var(--font-titulo);
+    color: var(--color-principal); 
+    text-align: center;
+}
+
+#gestor, h1, h2{
+    align-content: center;
+    color: var(--color-secundario);
+}
+
+.form-container {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center; 
+    height: 10vh; 
+    background-color: var(--color-principal); 
+    padding: 20px;
+}
+
+form input, form textarea, form select {
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+    padding: 10px; 
+    margin: 5px;
+    width: 100%; 
+    max-width: 300px; 
+    border: 3px;
+    font-family: var(--font-texto); 
+}
+
+table {
+    margin: 0 auto; 
+    border-collapse: collapse; 
+}
+
+th, td {
+    padding: 10px;
+}
+.subrayado {
+    text-decoration: underline;
+    text-decoration-thickness: 4px;
+    text-decoration-color: var(--color-secundario);
+}

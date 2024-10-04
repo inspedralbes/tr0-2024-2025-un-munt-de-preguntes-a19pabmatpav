@@ -1,12 +1,30 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MovieRoulette</title>
+    <link rel="stylesheet" href="./css/estils.css">
 </head>
 <body>
+    <h1>MovieRoulette</h1>
+    <div id="configuracionJuego">
+        <label for="nombreUsuario">Jugador</label>
+        <input type="text" id="nombreUsuario" required>
+        <label for="numeroPreguntas">Número de preguntes:</label>
+        <input type="number" id="numeroPreguntas" min="1" max="10" required>
+        <button id="iniciarJuegoBtn">Iniciar Joc</button>
+    </div>
     
+    <div id="partida" style="display:none;">
+        <div id="containerEstat"></div>
+        <div id="containerPreguntes"></div>
+        <div id="containerTempo" class="circular-container">
+            <p id="temporizador">0</p>
+        </div>
+    </div>
+    
+    
+    <script src="./js/functions.js"></script>
 </body>
 </html>
